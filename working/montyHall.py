@@ -1,5 +1,6 @@
 import random as rd
 from matplotlib import pyplot as plt
+import numpy as np
 
 # Mattia Celino 881202
 # sorry for the mess !
@@ -44,22 +45,22 @@ def giocatore(arrayDoors, playerName, playerWins):
     if playerName == "switcher":
         newChosen = switchDoor(removed, chosen)
         if didWin(arrayDoors, newChosen):
-            playerWins[0] += 1
+            playerWins.append(1)
 
     if playerName == "conservative":
         if didWin(arrayDoors, chosen):
-            playerWins[0] += 1
+            playerWins.append(2)
 
     if playerName == "newcomer":
         del arrayDoors[removed]
         chosen = rd.choice(arrayDoors)
         if chosen == "car":
-            playerWins[0] += 1
+            playerWins.append(3)
 
 doors = []
-switcherWins = [0]
-conservativeWins = [0]
-newcomerWins = [0]
+switcherWins = []
+conservativeWins = []
+newcomerWins = []
 total = 0
 
 for i in range(0, 2000):
@@ -70,6 +71,6 @@ for i in range(0, 2000):
     total += 1
 
 print(total)
-print("switcher won ", switcherWins[0], " times (", switcherWins[0]/total, " %)")
-print("conservative won ", conservativeWins[0], " times (", conservativeWins[0]/total, " %)")
-print("newcomer won ", newcomerWins[0], " times (", newcomerWins[0]/total, " %)")
+print("switcher won ", len(switcherWins), " times (", len(switcherWins)/total, " %)")
+print("conservative won ", len(conservativeWins), " times (", len(conservativeWins)/total, " %)")
+print("newcomer won ", len(newcomerWins), " times (", len(newcomerWins)/total, " %)")
