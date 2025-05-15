@@ -3,6 +3,8 @@ from matplotlib import pyplot as plt
 import emcee
 import corner
 
+# to not run the samplers and save times, the result can be found in the posteriorBayesGraphs directory
+
 # importing dataset
 datas = np.load("../solutions/transient.npy")
 #print(datas)
@@ -90,9 +92,11 @@ ndim = 4  # number of parameters in the model
 nwalkers = 20  # number of MCMC walkers
 nsteps = int(1e4)  # number of MCMC steps to take for each walker
 
-
-# Here I use my dirty fit from above to initialize the walkers.
-# You can do this better and first perform a maximum likelihood estimate.
+t0_quick=50
+A_quick=5
+b_quick=10
+alpha_quick=0.1
+theta_quick= np.array([A_quick,b_quick,t0_quick,alpha_quick])
 starting_guesses = theta_quick + 1e-1* np.random.randn(nwalkers, ndim)
 print(starting_guesses.shape)
 
@@ -137,3 +141,4 @@ plt.errorbar(time, flux, yerr=sigma_flux, marker="o", ls="", color="lightblue", 
 plt.xlabel("time")
 plt.ylabel("flux")
 plt.show()
+# da committare
